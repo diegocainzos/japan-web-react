@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import hiragana from './hiragana.json'; // Import the JSON data
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AnswerHistory from './AnswerHistory';
-export default function Hiragana({}) {
+export default function Quiz({dictionary}) {
     const [end, setEnd] = useState(false);
     const [rights, setRights] = useState(0);
     const [errors, setErrors] = useState(0);
@@ -11,10 +10,10 @@ export default function Hiragana({}) {
 
     const [history, setHistory] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0); // Track the position in the shuffled array
-    const [shuffledKeys] = useState(() =>   Object.keys(hiragana).sort(() => Math.random() - 0.5))
+    const [shuffledKeys] = useState(() =>   Object.keys(dictionary).sort(() => Math.random() - 0.5))
     // Get the current Hiragana and its romaji
     const currentHiragana = shuffledKeys[currentIndex];
-    const currentRomaji = hiragana[currentHiragana];
+    const currentRomaji = dictionary[currentHiragana];
 
     function check(e) {
         e.preventDefault();
