@@ -3,6 +3,7 @@ import './App.css';
 import hiragana from './hiragana.json'; // Import the JSON data
 import katakana from './katakana.json'; // Import the JSON data
 import Quiz from './Quiz';
+import Home from './Home';
 import { useState } from 'react';
 import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dictionary from './Dictionary';
@@ -19,7 +20,7 @@ function App() {
         <a href='/dictionary'>Dictionary</a>
     </nav>
     <Routes>
-        <Route path="/" element={<Quiz dictionary={hiragana}/>} />
+        <Route path="/" element={<Home/>} />
         <Route path="/katakana" element={<Quiz dictionary={katakana}/>} />
         <Route path="/hiragana" element={<Quiz dictionary={hiragana}/>} />
         <Route path="/dictionary" element={<Dictionary/>} />
