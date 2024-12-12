@@ -1,24 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
+import hiragana from './hiragana.json'; // Import the JSON data
+import katakana from './katakana.json'; // Import the JSON data
+import Quiz from './Quiz';
+import { useState } from 'react';
+import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dictionary from './Dictionary';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <BrowserRouter>
+    <nav className='flex justify-around py-2 bg-lime-500'>
+        <a href="/">Home</a>
+        <a href="/hiragana">Hiragana</a>
+        <a href="/katakana">Katakana</a>
+        <a href='/dictionary'>Dictionary</a>
+    </nav>
+    <Routes>
+        <Route path="/" element={<Quiz dictionary={hiragana}/>} />
+        <Route path="/katakana" element={<Quiz dictionary={katakana}/>} />
+        <Route path="/hiragana" element={<Quiz dictionary={hiragana}/>} />
+        <Route path="/dictionary" element={<Dictionary/>} />
+    </Routes>
+</BrowserRouter>
+
+ 
   );
 }
 
