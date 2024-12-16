@@ -50,7 +50,32 @@ export default function Quiz({dictionary}) {
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
             {end ? (
                 // Mostrar solo AnswerHistory si `end` es true
+                <>
                 <AnswerHistory history={history} />
+                <button
+                    className="mt-4 bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => {
+                        setEnd(false);
+                        setRights(0);
+                        setErrors(0);
+                        setHistory([]);
+                        setCurrentIndex(0);
+                        setStartTime(Date.now());
+                    }}
+                >
+                    Try Again
+                </button>
+                <button
+                    className="mt-4 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => {
+                        // Logic to navigate back to home
+                        window.location.href = '/';
+                    }}
+                >
+                    Back to Home
+                </button>
+                 
+                </>
             ) : (
                 // Mostrar el resto del juego si `end` es false
                 <>
