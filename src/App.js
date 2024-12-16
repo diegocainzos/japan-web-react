@@ -6,6 +6,10 @@ import Quiz from './Quiz';
 import { useState } from 'react';
 import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dictionary from './Dictionary';
+import QuizController from './QuizController';
+import KanaCard from './KanaCard';
+import Form from './Form';
+
 
 
 function App() {
@@ -19,7 +23,7 @@ function App() {
         <a href='/dictionary'>Dictionary</a>
     </nav>
     <Routes>
-        <Route path="/" element={<Quiz dictionary={hiragana}/>} />
+        <Route path="/" element={<QuizController/>} />
         <Route path="/katakana" element={<Quiz dictionary={katakana}/>} />
         <Route path="/hiragana" element={<Quiz dictionary={hiragana}/>} />
         <Route path="/dictionary" element={<Dictionary/>} />

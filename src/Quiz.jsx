@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleCheck, faCircleXmark, faHourglass } from '@fortawesome/free-solid-svg-icons';
+
+
 import AnswerHistory from './AnswerHistory';
 export default function Quiz({dictionary}) {
+
     const [end, setEnd] = useState(false);
     const [rights, setRights] = useState(0);
     const [errors, setErrors] = useState(0);
@@ -14,6 +19,8 @@ export default function Quiz({dictionary}) {
     // Get the current Hiragana and its romaji
     const currentHiragana = shuffledKeys[currentIndex];
     const currentRomaji = dictionary[currentHiragana];
+    useEffect(() => {console.log('hola')}, [history]);
+    
 
     function check(e) {
         e.preventDefault();
@@ -40,7 +47,7 @@ export default function Quiz({dictionary}) {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-500 p-4">
+        <div className="flex flex-col items-center justify-center min-h-screen p-4">
             {end ? (
                 // Mostrar solo AnswerHistory si `end` es true
                 <AnswerHistory history={history} />
@@ -65,13 +72,19 @@ export default function Quiz({dictionary}) {
                             </button>
                         </div>
                     </form>
-                    <div className="mt-4">
-                        <h2 className="text-xl">
-                            Errors: <span className="text-red-500">{errors}</span>
-                        </h2>
-                        <h2 className="text-xl">
-                            Rights: <span className="text-green-500">{rights}</span>
-                        </h2>
+                    <div className="mt-4 flex space-x-4">
+                        <div className="flex items-center">
+                            <FontAwesomeIcon icon={faCircleXmark} className="text-red-500" />
+                            <span className="text-xl ml-2">{errors}</span>
+                        </div>
+                        <div className="flex items-center">
+                            <FontAwesomeIcon icon={faCircleCheck} className="text-green-500" />
+                            <span className="text-xl ml-2">{rights}</span>
+                        </div>
+                        <div className="flex items-center">
+                            <FontAwesomeIcon icon={faHourglass} className="text-blue-500" />
+                            <span className="text-xl ml-2">{shuffledKeys.length - currentIndex}</span>
+                        </div>
                     </div>
                 </>
             )}
