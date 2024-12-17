@@ -52,26 +52,46 @@ export default function Form({handleSubmit}) {
 
  
     const toggleAllKata = () => {
-        // If any katakana is selected, uncheck all; otherwise, check all
+        // Retrieve all katakana checkboxes and their corresponding rows
         const checkboxes = document.querySelectorAll('.kata-checkbox input');
-        const allKatakana = [...katakana, ...katakana2];
+        if (!checkboxes.length) return; // Ensure there are checkboxes to toggle
+    
+        const allKatakana = [...katakana, ...katakana2].map((k) => 'kata-' + k.romaji);
         const allSelected = selectedRows.filter(row => row.startsWith('kata-')).length === allKatakana.length;
-        setSelectedRows(allSelected ? selectedRows.filter(row => !row.startsWith('kata-')) : [...selectedRows, ...allKatakana.map((k) => 'kata-'+ k.romaji)]);
+    
+        // Update selectedRows based on current selection state
+        setSelectedRows(allSelected
+            ? selectedRows.filter(row => !row.startsWith('kata-')) // Uncheck all
+            : [...new Set([...selectedRows, ...allKatakana])] // Check all (ensure no duplicates)
+        );
+    
+        // Update checkbox states
         checkboxes.forEach((checkbox) => {
             checkbox.checked = !allSelected;
         });
     };
+    
 
     const toggleAllHira = () => {
-        // If any hiragana is selected, uncheck all; otherwise, check all
+        // Retrieve all hiragana checkboxes and their corresponding rows
         const checkboxes = document.querySelectorAll('.hira-checkbox input');
-        const allHiragana = [...hiragana, ...hiragana2];
+        if (!checkboxes.length) return; // Ensure there are checkboxes to toggle
+    
+        const allHiragana = [...hiragana, ...hiragana2].map((k) => 'hira-' + k.romaji);
         const allSelected = selectedRows.filter(row => row.startsWith('hira-')).length === allHiragana.length;
-        setSelectedRows(allSelected ? selectedRows.filter(row => !row.startsWith('hira-')) : [...selectedRows, ...allHiragana.map((k) => 'hira-'+ k.romaji)]);
+     
+        // Update selectedRows based on current selection state
+        setSelectedRows(allSelected 
+            ? selectedRows.filter(row => !row.startsWith('hira-')) // Uncheck all
+            : [...new Set([...selectedRows, ...allHiragana])] // Check all (ensure no duplicates)
+        );
+    
+        // Update checkbox states
         checkboxes.forEach((checkbox) => {
             checkbox.checked = !allSelected;
         });
-    }
+    };
+    
 
     const onSubmit = (e) => {
         e.preventDefault();
