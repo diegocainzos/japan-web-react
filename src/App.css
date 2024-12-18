@@ -12,6 +12,9 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.kana-container {
+  display: flex;
+}
 
 .App-header {
   background-color: #282c34;
@@ -34,5 +37,52 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .App-header {
+    font-size: calc(8px + 2vmin);
+  }
+  
+  .App-logo {
+    height: 30vmin;
+  }
+  .kana-container{
+    align-items: center;
+    flex-direction: column;
+  }
+  .button-container{
+    width: 100%;
+  }
+  .nav {
+    display: none !important;
+  }
+  .kana-card{
+    width: 100%;
+ 
+  }
+  .kana-card h1{
+    font-size:30px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .App-header {
+    font-size: calc(9px + 2vmin);
+  }
+  
+  .App-logo {
+    height: 35vmin;
+  }
+}
+
+@media (min-width: 1025px) {
+  .App-header {
+    font-size: calc(10px + 2vmin);
+  }
+  
+  .App-logo {
+    height: 40vmin;
   }
 }

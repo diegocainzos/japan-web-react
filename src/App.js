@@ -16,7 +16,7 @@ function App() {
   return (
 
     <BrowserRouter>
-    <nav className='flex justify-around py-2 bg-lime-500'>
+    <nav className='flex justify-around nav py-2 bg-lime-500 '>
         <a href="/">Home</a>
         <a href="/hiragana">Hiragana</a>
         <a href="/katakana">Katakana</a>

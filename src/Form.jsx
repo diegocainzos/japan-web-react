@@ -19,7 +19,7 @@ export default function Form({handleSubmit}) {
 
 
     ];
-    const katakana2 = [
+    const kataDakuten = [
         { character: "ガ", romaji: "g"},
         { character: "ザ", romaji: "z"},
         { character: "ダ", romaji: "d"},
@@ -41,7 +41,7 @@ export default function Form({handleSubmit}) {
         { character: "わ", romaji: "w"},
        
     ];
-    const hiragana2 = [
+    const hiraDakuten = [
         { character: "が", romaji: "g"},
         { character: "ざ", romaji: "z"},
         { character: "だ", romaji: "d"},
@@ -56,7 +56,7 @@ export default function Form({handleSubmit}) {
         const checkboxes = document.querySelectorAll('.kata-checkbox input');
         if (!checkboxes.length) return; // Ensure there are checkboxes to toggle
     
-        const allKatakana = [...katakana, ...katakana2].map((k) => 'kata-' + k.romaji);
+        const allKatakana = [...katakana, ...kataDakuten].map((k) => 'kata-' + k.romaji);
         const allSelected = selectedRows.filter(row => row.startsWith('kata-')).length === allKatakana.length;
     
         // Update selectedRows based on current selection state
@@ -77,7 +77,7 @@ export default function Form({handleSubmit}) {
         const checkboxes = document.querySelectorAll('.hira-checkbox input');
         if (!checkboxes.length) return; // Ensure there are checkboxes to toggle
     
-        const allHiragana = [...hiragana, ...hiragana2].map((k) => 'hira-' + k.romaji);
+        const allHiragana = [...hiragana, ...hiraDakuten].map((k) => 'hira-' + k.romaji);
         const allSelected = selectedRows.filter(row => row.startsWith('hira-')).length === allHiragana.length;
      
         // Update selectedRows based on current selection state
@@ -103,39 +103,24 @@ export default function Form({handleSubmit}) {
     };
     return (
         <>
-        <h1 className="text-4xl font-bold mb-4">Select the kana you want to practice</h1>
-        <form onSubmit={onSubmit} className='m-10 flex-col' action="">
-            <div className="flex gap-x-7 justify-center">
-                <div  className="flex flex-col space-y-3 hira-checkbox">
-                    {hiragana.map((hira) => (
-                        <KanaCard dic='hira' selectedRow={setSelectedRows} character={hira.character} romaji={hira.romaji} />
-                    ))}              
-                </div>
-                <div  className="flex flex-col space-y-3 kata-checkbox">
-                    {katakana.map((kana) => (
-                        <KanaCard  dic='kata' selectedRow={setSelectedRows} character={kana.character} romaji={kana.romaji} />
-                    ))}
-                  
-                </div>
-                <div  className="flex flex-col space-y-3 hira-checkbox">
-                    {hiragana2.map((kana) => (
-                        <KanaCard dic='hira' selectedRow={setSelectedRows} character={kana.character} romaji={kana.romaji} />
+            <h1 className="text-4xl font-bold mb-4">Select the kana you want to practice</h1>
+            <form onSubmit={onSubmit} className='m-10 flex-col   kana-card' action="">
+                <div className="flex kana-container gap-16 justify-center">
+                    {[{ label: "HIRAGANA", data: hiragana, dic: 'hira' }, { label: "KATAKANA", data: katakana, dic: 'kata' }, { label: "DAKUTEN", data: hiraDakuten, dic: 'hira' }, { label: "DAKUTEN", data: kataDakuten, dic: 'kata' }].map((group, index) => (
+                        <div key={index} className={`flex flex-col space-y-3 ${group.dic}-checkbox w-full items-center`}>
+                            <label className="w-full flex justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{group.label}</label>
+                            {group.data.map((kana) => (
+                                <KanaCard key={kana.romaji} dic={group.dic} selectedRow={setSelectedRows} character={kana.character} romaji={kana.romaji} />
+                            ))}
+                        </div>
                     ))}
                 </div>
-                <div className="flex flex-col space-y-3 kata-checkbox">
-                    {katakana2.map((kana) => (
-                        <KanaCard  dic='kata' selectedRow={setSelectedRows} character={kana.character} romaji={kana.romaji} />
-                    ))}
-                  
+                <div className="flex flex-col button-container space-y-5 mt-4 ">
+                    <button type="button" className="rounded-lg border-2 border-blue-500 text-blue-800 py-2" onClick={toggleAllHira}>Select all hiragana</button>
+                    <button type="button" className="rounded-lg border-2 border-blue-500 bg-white text-blue-800 py-2" onClick={toggleAllKata}>Select all katakana</button>
+                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Start Quiz</button>
                 </div>
-           </div>
-           <div className="flex flex-col  space-y-5 mt-4 w-[600px]">
-                <button type="button" className="rounded-lg border-2 border-blue-500 bg-white text-blue-800 py-2"  onClick={toggleAllHira}>Select all hiragana</button>
-                <button type="button" className="rounded-lg border-2 border-blue-500 bg-white text-blue-800 py-2" onClick={toggleAllKata}>Select all katakana</button>
-                
-            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Start Quiz</button>
-           </div>
-        </form>
+            </form>
         </>
     );
 }
