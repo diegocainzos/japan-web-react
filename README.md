@@ -75,7 +75,7 @@ The app will run on [http://localhost:3000](http://localhost:3000).
 <img src="src/assets/data/home.png" alt="Character Selector Screenshot" style="border-radius: 10px;" />
 
 ### Quiz in Action
-<img src="src/assets/data/quiz.png" alt="Quiz Screenshot" style="border-radius: 10px;" />
+<img src="src/assets/data/quiz.PNG" alt="Quiz Screenshot" style="border-radius: 10px;" />
 
 ---
 
