@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck, faCircleXmark, faHourglass } from '@fortawesome/free-solid-svg-icons';
 
 
-import AnswerHistory from './AnswerHistory';
+import AnswerHistory from '../../components/AnswerHistory';
 export default function Quiz({dictionary}) {
 
     const [end, setEnd] = useState(false);
@@ -19,9 +19,7 @@ export default function Quiz({dictionary}) {
     // Get the current Hiragana and its romaji
     const currentHiragana = shuffledKeys[currentIndex];
     const currentRomaji = dictionary[currentHiragana];
-    useEffect(() => {console.log('hola')}, [history]);
     
-
     function check(e) {
         e.preventDefault();
         const isCorrect = userAnswer === currentRomaji;

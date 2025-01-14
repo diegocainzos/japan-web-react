@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Form from './Form';
+import Form from '../../components/Form';
 import Quiz from './Quiz';
-import katakana from './katakana_v2.json'; // Import the JSON data
+import katakana from '../../assets/json/katakana_v2.json'; // Import the JSON data
 
 export default function QuizController() {
 
